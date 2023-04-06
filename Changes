@@ -34,4 +34,5 @@ Revision history for Perl extension HTML::Index.
 0.16 Tue 28 Mar 2023 13:07:26 BST
         - changed big.t to use done_testing for test count
 0.17 Tue  4 Apr 2023 18:35:40 BST
-        - update author email address
+0.18 Thu  6 Apr 2023 15:16:11 BST
+        - add github repo to metadata
