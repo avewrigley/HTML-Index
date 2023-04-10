@@ -1,5 +1,8 @@
 package HTML::Index::Store;
 
+use strict;
+use warnings;
+
 use Carp;
 no Carp::Assert;
 use Compress::Zlib;
