@@ -265,6 +265,8 @@ sub filter
     return wantarray ? @n : $n[0];
 }
 
+=back
+
 =head1 SUB-CLASSABLE METHODS
 
 =over 4
