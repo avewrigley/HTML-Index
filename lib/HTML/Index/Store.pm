@@ -409,17 +409,8 @@ sub _deflate
     my $self = shift;
     my $data = shift;
     return $data unless $self->{COMPRESS};
-    my ( $deflate, $out, $status );
-    ( $deflate, $status ) = deflateInit( -Level => Z_BEST_COMPRESSION )
-        or croak "deflateInit failed: $status\n"
-    ;
-    ( $out, $status ) = $deflate->deflate( \$data );
-    croak "deflate failed: $status\n" unless $status == Z_OK;
-    $data = $out;
-    ( $out, $status ) = $deflate->flush();
-    croak "flush failed: $status\n" unless $status == Z_OK;
-    $data .= $out;
-    return $data;
+    my $compressed = compress( $data );
+    return $compressed || $data;
 }
 
 sub _inflate
@@ -427,14 +418,8 @@ sub _inflate
     my $self = shift;
     my $data = shift;
     return $data unless $self->{COMPRESS};
-    my ( $inflate, $status );
-    ( $inflate, $status ) = inflateInit()
-        or croak "inflateInit failed: $status\n"
-    ;
-    ( $data, $status ) = $inflate->inflate( \$data )
-        or croak "inflate failed: $status\n"
-    ;
-    return $data;
+    my $uncompressed = uncompress( $data );
+    return $uncompressed || $data;
 }
 
 sub _get
