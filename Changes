@@ -36,3 +36,5 @@ Revision history for Perl extension HTML::Index.
 0.17 Tue  4 Apr 2023 18:35:40 BST
 0.18 Thu  6 Apr 2023 15:16:11 BST
         - add github repo to metadata
+0.19 Mon 10 Apr 2023 17:58:29 BST
+        - fix compress bug
