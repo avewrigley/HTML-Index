@@ -406,6 +406,7 @@ sub nkeys
 
 sub _deflate
 {
+    my $self = shift;
     my $data = shift;
     return $data unless $self->{COMPRESS};
     my ( $deflate, $out, $status );
@@ -423,6 +424,7 @@ sub _deflate
 
 sub _inflate
 {
+    my $self = shift;
     my $data = shift;
     return $data unless $self->{COMPRESS};
     my ( $inflate, $status );
@@ -440,7 +442,7 @@ sub _get
     my $self = shift;
     my $table = shift;
     my $key = shift;
-    return _inflate( $self->get( $table, $key ) );
+    return $self->_inflate( $self->get( $table, $key ) );
 }
 
 sub _put
@@ -449,7 +451,7 @@ sub _put
     my $table = shift;
     my $key = shift;
     my $val = shift;
-    $self->put( $table, $key, _deflate( $val ) );
+    $self->put( $table, $key, $self->_deflate( $val ) );
 }
 
 sub _stem
@@ -457,7 +459,7 @@ sub _stem
     my $self = shift;
     my $w = shift;
     return $w unless $self->{stemmer};
-    $wa = $self->{stemmer}->stem( $w );
+    my $wa = $self->{stemmer}->stem( $w );
     carp "stem $w -> $wa->[0]\n" if $self->{VERBOSE};
     return $wa->[0];
 }
